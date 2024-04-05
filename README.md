@@ -17,10 +17,13 @@ as identifies memory-intensive region.
 Installation & download of llvm :
 
 For Linux based :
-- $ sudo apt-get update
-- $ sudo apt-get install clang llvm
+
+    $ sudo apt-get update
+    $ sudo apt-get install clang llvm
+    
 For MAC OS based :
-- $ brew install llvm
+
+    $ brew install llvm
 
 
 Conversion of application file to .ll file :
@@ -39,18 +42,18 @@ various libraries like Cython or OpenAI CodeX.
         pip install dotenv
 
 - To compile it :
+  
           python3 script.py
           C/Cpp Application to .ll File :
           clang -S -emit-llvm <file_name>.c -o <file_name>.ll
   
 Optimization Technique with LLVM Pass :
 
-        - Optimizations are implemented as Passes that traverse some portion of a program to either
-        collect information or transform the program. Here we have to identify memory intensive
-        regions. Functions used for intended work has been provided by llvm pass header files.
+Optimizations are implemented as Passes that traverse some portion of a program to either
+collect information or transform the program. Here we have to identify memory intensive
+regions. Functions used for intended work has been provided by llvm pass header files.
         
 - To compile the llvmpass file :
-$ clang++ -shared -o <llvm_pass_filename>.so <llvm_pass_filename>.cpp `llvm-config --cxxflags --
-ldflags --libs` -fPIC
-$ opt -load ./<llvm_pass_filename>.so -instruction-counter < {app_file_name}.ll >
-/dev/null
+
+      clang++ -shared -o <llvm_pass_filename>.so <llvm_pass_filename>.cpp `llvm-config --cxxflags --ldflags --libs` -fPIC
+      opt -load ./<llvm_pass_filename>.so -instruction-counter < {app_file_name}.ll > /dev/null
